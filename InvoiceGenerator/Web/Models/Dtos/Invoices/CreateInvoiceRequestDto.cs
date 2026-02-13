@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using InvoiceGenerator.Models.Dtos.Invoices;
+
+
 namespace InvoiceGenerator.Web.Models.Dtos.Invoices;
 
 public record CreateInvoiceRequestDto
@@ -30,5 +33,7 @@ public record CreateInvoiceRequestDto
 
     [StringLength(500)]
     public string? Notes { get; init; }
+    public DateTime InvoiceDate { get; internal set; }
+    public IEnumerable<object>? Items { get; internal set; }
 }
 

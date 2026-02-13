@@ -15,7 +15,33 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "InvoiceGenerator.Web.Models.Dtos.Invoices.InvoiceDto",
+        "Type": "InvoiceGenerator.Models.Dtos.Invoices.InvoiceResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "InvoicesController",
+    "Method": "GetInvoice",
+    "RelativePath": "api/invoices/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "InvoiceGenerator.Models.Dtos.Invoices.InvoiceResponseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

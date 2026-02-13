@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceGenerator.Web.Models.Dtos.Invoices;
+namespace InvoiceGenerator.Models.Dtos.Invoices;
 
 public record InvoiceLineDto
 {

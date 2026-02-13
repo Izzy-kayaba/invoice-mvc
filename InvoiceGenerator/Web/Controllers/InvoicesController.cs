@@ -1,5 +1,7 @@
+using InvoiceGenerator.Services.Interfaces;
 using InvoiceGenerator.Web.Models.Dtos.Invoices;
-using InvoiceGenerator.Web.Services.Interfaces;
+using InvoiceGenerator.Models.Dtos.Invoices;
+
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController] // Enables automatic model validation & API behaviors
@@ -16,17 +18,27 @@ public class InvoicesController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<InvoiceDto> CreateInvoice(
+    public async Task<ActionResult<InvoiceResponseDto>> CreateInvoice(
         [FromBody] CreateInvoiceRequestDto dto)
     {
-        // Controller does NOT contain business logic
-        // It simply delegates the work
-        var result = _invoiceService.CreateInvoice(dto);
+        var result = await _invoiceService.CreateInvoiceAsync(dto);
 
-        // Returns HTTP 201 Created with the response DTO
+        // Return 201 Created. Replace "GetInvoice" with the action name that returns a single invoice.
         return CreatedAtAction(
-            nameof(CreateInvoice),
+            nameof(GetInvoice),
+            new { id = result.Id },
             result
         );
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<InvoiceResponseDto>> GetInvoice(Guid id)
+    {
+        var invoice = await _invoiceService.GetByIdAsync(id);
+
+        if (invoice == null)
+            return NotFound();
+
+        return Ok(invoice);
     }
 }

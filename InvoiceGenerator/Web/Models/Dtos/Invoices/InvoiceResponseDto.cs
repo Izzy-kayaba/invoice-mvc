@@ -1,4 +1,7 @@
-﻿using InvoiceGenerator.Web.Models.Dtos.Invoices;
+﻿using InvoiceGenerator.Models.Enums;
+using InvoiceGenerator.Services.Interfaces;
+using InvoiceGenerator.Web.Models.Dtos.Invoices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InvoiceGenerator.Models.Dtos.Invoices
 {
@@ -16,5 +19,4 @@ namespace InvoiceGenerator.Models.Dtos.Invoices
         public InvoiceStatus Status { get; init; }
         public string? Notes { get; init; }
     }
-
 }

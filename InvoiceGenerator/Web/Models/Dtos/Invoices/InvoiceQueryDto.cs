@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using InvoiceGenerator.Web.Models.Dtos.Invoices;
+
+using InvoiceGenerator.Models.Enums;
 
 public class InvoiceQueryDto
 {
@@ -18,7 +19,7 @@ public class InvoiceQueryDto
     [EmailAddress]
     public string? CustomerEmail { get; init; }
 
-    public InvoiceGenerator.Web.Models.Dtos.Invoices.InvoiceStatus? Status { get; init; }
+    public InvoiceStatus? Status { get; init; }
 
     public DateTime? IssueDateFrom { get; init; }
     

@@ -1,13 +1,13 @@
-﻿using InvoiceGenerator.Web.Models.Dtos.Invoices;
+﻿
+using InvoiceGenerator.Models.Dtos.Invoices;
+using InvoiceGenerator.Web.Models.Dtos.Invoices;
 
-namespace InvoiceGenerator.Web.Services.Interfaces;
+namespace InvoiceGenerator.Services.Interfaces;
 
 /// Defines invoice-related business operations.
 /// Controllers depend on this interface, not implementation.
 public interface IInvoiceService
 {
-    /// Creates an invoice using provided data.
-    /// Business logic lives here.
-    InvoiceDto CreateInvoice(CreateInvoiceRequestDto dto);
+    Task<InvoiceResponseDto> CreateInvoiceAsync(CreateInvoiceRequestDto dto);
+    Task<InvoiceResponseDto?> GetByIdAsync(Guid id);
 }
-

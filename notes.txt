@@ -1,0 +1,5 @@
+Right now your service uses DTOs directly which is fine for a demo but in real systems:
+DTOs → mapped → Domain Entities → saved
+DTOs are API contracts.
+Entities represent business truth.
+
