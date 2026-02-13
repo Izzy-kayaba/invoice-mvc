@@ -26,3 +26,4 @@ C:\Users\israe\Downloads\app-mvc\IzzyInvoice\obj\Debug\net10.0\refint\IzzyInvoic
 C:\Users\israe\Downloads\app-mvc\IzzyInvoice\obj\Debug\net10.0\IzzyInvoice.pdb
 C:\Users\israe\Downloads\app-mvc\IzzyInvoice\obj\Debug\net10.0\IzzyInvoice.genruntimeconfig.cache
 C:\Users\israe\Downloads\app-mvc\IzzyInvoice\obj\Debug\net10.0\ref\IzzyInvoice.dll
+C:\Users\israe\Downloads\app-mvc\IzzyInvoice\obj\Debug\net10.0\IzzyInvoice.sourcelink.json
