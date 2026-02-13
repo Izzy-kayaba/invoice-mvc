@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/InvoiceGenerator/" />
+  <Folder Name="/InvoiceGenerator/Web/">
+    <Project Path="InvoiceGenerator/Web/InvoiceGenerator.csproj" />
+  </Folder>
+</Solution>

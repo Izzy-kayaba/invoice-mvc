@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "InvoicesController",
+    "Method": "CreateInvoice",
+    "RelativePath": "api/invoices",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "InvoiceGenerator.Web.Models.Dtos.Invoices.CreateInvoiceRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "InvoiceGenerator.Web.Models.Dtos.Invoices.InvoiceDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
