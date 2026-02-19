@@ -3,14 +3,13 @@ using InvoiceGenerator.Repositories;
 using InvoiceGenerator.Repositories.Interfaces;
 using InvoiceGenerator.Services;
 using InvoiceGenerator.Services.Interfaces;
-
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args); // Instance of webApplication builder combining Startup.cs + Program.cs
 
 // Add EF Core with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ArtecoConnection")));
 
 // Dependency Injection
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();

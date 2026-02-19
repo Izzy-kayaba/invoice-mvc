@@ -21,8 +21,8 @@ namespace InvoiceGenerator.Repositories
 
         public async Task<Invoice> CreateAsync(Invoice invoice)
         {
-            await _context.Invoices.AddAsync(invoice);
-            await _context.SaveChangesAsync();
+            await _context.Invoices.AddAsync(invoice).ConfigureAwait(true);
+            await _context.SaveChangesAsync().ConfigureAwait(true);
             return invoice;
         }
 
@@ -30,14 +30,14 @@ namespace InvoiceGenerator.Repositories
         {
             return await _context.Invoices
                 .Include(i => i.Items)
-                .FirstOrDefaultAsync(i => i.Id == id);
+                .FirstOrDefaultAsync(i => i.Id == id).ConfigureAwait(true);
         }
 
         public async Task<List<Invoice>> GetAllAsync()
         {
             return await _context.Invoices
                 .Include(i => i.Items)
-                .ToListAsync();
+                .ToListAsync().ConfigureAwait(true);
         }
 
         Task<Invoice?> IInvoiceRepository.UpdateAsync(Invoice invoice)

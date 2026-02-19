@@ -2,44 +2,45 @@ using System.ComponentModel.DataAnnotations;
 using InvoiceGenerator.Models.Dtos.Invoices;
 using InvoiceGenerator.Models.Enums;
 
-namespace InvoiceGenerator.Web.Models.Dtos.Invoices;
-
-public record InvoiceItemDto
+namespace InvoiceGenerator.Web.Models.Dtos.Invoices
 {
-    [Required]
-    public Guid Id { get; init; }
+    public record InvoiceItemDto
+    {
+        [Required]
+        public Guid Id { get; init; }
 
-    [Required]
-    [StringLength(50, MinimumLength = 3)]
-    public string InvoiceNumber { get; init; } = default!;
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
+        public string InvoiceNumber { get; init; } = default!;
 
-    [Required]
-    public DateTime IssueDate { get; init; }
+        [Required]
+        public DateTime IssueDate { get; init; }
 
-    [Required]
-    public DateTime DueDate { get; init; }
+        [Required]
+        public DateTime DueDate { get; init; }
 
-    [Required]
-    [StringLength(150)]
-    public string CustomerName { get; init; } = default!;
+        [Required]
+        [StringLength(150)]
+        public string CustomerName { get; init; } = default!;
 
-    [Required]
-    [EmailAddress]
-    public string CustomerEmail { get; init; } = default!;
+        [Required]
+        [EmailAddress]
+        public string CustomerEmail { get; init; } = default!;
 
-    [Range(0.01, double.MaxValue)]
-    public decimal TotalAmount { get; init; }
+        [Range(0.01, double.MaxValue)]
+        public decimal TotalAmount { get; init; }
 
-    [Required]
-    [StringLength(3, MinimumLength = 3)]
-    public string Currency { get; init; } = "ZAR";
+        [Required]
+        [StringLength(3, MinimumLength = 3)]
+        public string Currency { get; init; } = "ZAR";
 
-    [MinLength(1)]
-    public IReadOnlyCollection<InvoiceLineDto> Lines { get; init; } = Array.Empty<InvoiceLineDto>();
+        [MinLength(1)]
+        public IReadOnlyCollection<InvoiceLineDto> Lines { get; init; } = Array.Empty<InvoiceLineDto>();
 
-    [Required]
-    public InvoiceStatus Status { get; init; }
+        [Required]
+        public InvoiceStatus Status { get; init; }
 
-    [StringLength(500)]
-    public string? Notes { get; init; }
+        [StringLength(500)]
+        public string? Notes { get; init; }
+    }
 }

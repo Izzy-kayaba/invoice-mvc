@@ -25,5 +25,6 @@ public class InvoiceItem
     public Guid InvoiceId { get; set; }
 
     [ForeignKey("InvoiceId")]
-    public Invoice? Invoice { get; set; }
+    [Required]
+    public required Invoice Invoice { get; set; }
 }
