@@ -21,11 +21,12 @@ namespace InvoiceGenerator.Services
             _repository = repository;
         }
 
-        public async Task<InvoiceResponseDto> CreateInvoiceAsync(CreateInvoiceRequestDto dto)
+        public async Task<InvoiceResponseDto> CreateInvoiceAsync(CreateInvoiceRequestDto dto, Guid userId)
         {
             var invoice = new Invoice
             {
                 Id = Guid.NewGuid(),
+                UserId = userId,
                 InvoiceNumber = dto.InvoiceNumber,
                 IssueDate = dto.IssueDate,
                 DueDate = dto.DueDate,
@@ -49,31 +50,37 @@ namespace InvoiceGenerator.Services
 
             var createdInvoice = await _repository.CreateAsync(invoice).ConfigureAwait(true);
 
-            return new InvoiceResponseDto
+            return MapToResponse(createdInvoice);
+        }
+
+        public async Task<IEnumerable<InvoiceResponseDto>> GetAllAsync(Guid userId)
+        {
+            var invoices = await _repository.GetAllAsync(userId).ConfigureAwait(true);
+
+            return invoices.Select(invoice => new InvoiceResponseDto
             {
-                Id = createdInvoice.Id,
-                InvoiceNumber = createdInvoice.InvoiceNumber,
-                IssueDate = createdInvoice.IssueDate,
-                DueDate = createdInvoice.DueDate,
-                CustomerName = createdInvoice.CustomerName,
-                CustomerEmail = createdInvoice.CustomerEmail,
-                TotalAmount = createdInvoice.TotalAmount,
-                Currency = createdInvoice.Currency,
-                Status = createdInvoice.Status,
-                Notes = createdInvoice.Notes,
-                Lines = createdInvoice.Items.Select(i => new InvoiceLineDto
+                Id = invoice.Id,
+                InvoiceNumber = invoice.InvoiceNumber,
+                IssueDate = invoice.IssueDate,
+                DueDate = invoice.DueDate,
+                CustomerName = invoice.CustomerName,
+                CustomerEmail = invoice.CustomerEmail,
+                TotalAmount = invoice.TotalAmount,
+                Currency = invoice.Currency,
+                Status = invoice.Status,
+                Notes = invoice.Notes,
+                Lines = invoice.Items.Select(i => new InvoiceLineDto
                 {
                     Description = i.Description,
                     Quantity = i.Quantity,
                     UnitPrice = i.UnitPrice
                 }).ToList()
-            };
+            });
         }
 
-
-        public async Task<InvoiceResponseDto?> GetByIdAsync(Guid id)
+        public async Task<InvoiceResponseDto?> GetByIdAsync(Guid id, Guid userId)
         {
-            var invoice = await _repository.GetByIdAsync(id).ConfigureAwait(true);
+            var invoice = await _repository.GetByIdAsync(id, userId).ConfigureAwait(true);
 
             if (invoice == null)
                 return null;
@@ -99,5 +106,37 @@ namespace InvoiceGenerator.Services
             };
         }
 
+        public Task<InvoiceResponseDto?> GetByIdAsync(Guid id, Guid userId, bool isAdmin)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteInvoiceAsync(Guid id, Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static InvoiceResponseDto MapToResponse(Invoice invoice)
+        {
+            return new InvoiceResponseDto
+            {
+                Id = invoice.Id,
+                InvoiceNumber = invoice.InvoiceNumber,
+                IssueDate = invoice.IssueDate,
+                DueDate = invoice.DueDate,
+                CustomerName = invoice.CustomerName,
+                CustomerEmail = invoice.CustomerEmail,
+                TotalAmount = invoice.TotalAmount,
+                Currency = invoice.Currency,
+                Status = invoice.Status,
+                Notes = invoice.Notes,
+                Lines = invoice.Items.Select(i => new InvoiceLineDto
+                {
+                    Description = i.Description,
+                    Quantity = i.Quantity,
+                    UnitPrice = i.UnitPrice
+                }).ToList()
+            };
+        }
     }
 }

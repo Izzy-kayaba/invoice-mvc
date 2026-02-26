@@ -322,3 +322,4 @@ C:\Users\israe\Downloads\app-mvc\InvoiceGenerator\Web\obj\Debug\net10.0\InvoiceG
 C:\Users\israe\Downloads\app-mvc\InvoiceGenerator\Web\obj\Debug\net10.0\InvoiceGenerator.genruntimeconfig.cache
 C:\Users\israe\Downloads\app-mvc\InvoiceGenerator\Web\obj\Debug\net10.0\ref\InvoiceGenerator.dll
 C:\Users\israe\Downloads\app-mvc\InvoiceGenerator\Web\bin\Debug\net10.0\BCrypt.Net-Next.dll
+C:\Users\israe\Downloads\app-mvc\InvoiceGenerator\Web\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

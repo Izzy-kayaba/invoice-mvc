@@ -6,14 +6,9 @@ namespace InvoiceGenerator.Repositories.Interfaces
     public interface IInvoiceRepository
     {
         Task<Invoice> CreateAsync(Invoice invoice);
-
-        Task<Invoice?> GetByIdAsync(Guid id);
-
-        Task<List<Invoice>> GetAllAsync();
-
+        Task<IEnumerable<Invoice>> GetAllAsync(Guid userId);
+        Task<Invoice?> GetByIdAsync(Guid id, Guid userId);
+        Task<bool> DeleteAsync(Guid id, Guid userId);
         Task<Invoice?> UpdateAsync(Invoice invoice);
-
-        Task<bool> DeleteAsync(Guid id);
-
     }
 }

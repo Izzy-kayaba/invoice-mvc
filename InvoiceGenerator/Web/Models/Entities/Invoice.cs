@@ -15,6 +15,8 @@ namespace InvoiceGenerator.Models.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        
+        public Guid UserId { get; set; }
 
         [Required]
         [MaxLength(50)]

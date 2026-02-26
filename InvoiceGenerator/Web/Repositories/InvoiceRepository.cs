@@ -10,7 +10,7 @@ namespace InvoiceGenerator.Repositories
     /// <summary>
     /// EF Core implementation of Invoice repository.
     /// </summary>
-    public class InvoiceRepository: IInvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -26,28 +26,49 @@ namespace InvoiceGenerator.Repositories
             return invoice;
         }
 
-        public async Task<Invoice?> GetByIdAsync(Guid id)
+        public async Task<Invoice?> GetByIdAsync(Guid id, Guid userId)
         {
             return await _context.Invoices
                 .Include(i => i.Items)
-                .FirstOrDefaultAsync(i => i.Id == id).ConfigureAwait(true);
+                .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId).ConfigureAwait(true);
         }
 
-        public async Task<List<Invoice>> GetAllAsync()
+        public async Task<IEnumerable<Invoice>> GetAllAsync(Guid userId)
         {
             return await _context.Invoices
                 .Include(i => i.Items)
-                .ToListAsync().ConfigureAwait(true);
+                .Where(i => i.UserId == userId)
+                .ToListAsync()
+                .ConfigureAwait(true);
         }
 
-        Task<Invoice?> IInvoiceRepository.UpdateAsync(Invoice invoice)
+        public async Task<bool> DeleteAsync(Guid id, Guid userId)
         {
-            throw new NotImplementedException();
+            var invoice = await _context.Invoices
+                .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
+
+            if (invoice == null)
+                return false;
+
+            _context.Invoices.Remove(invoice);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
-        Task<bool> IInvoiceRepository.DeleteAsync(Guid id)
+        public async Task<Invoice?> UpdateAsync(Invoice invoice)
         {
-            throw new NotImplementedException();
+            var existingInvoice = await _context.Invoices
+                .Include(i => i.Items)
+                .FirstOrDefaultAsync(i => i.Id == invoice.Id && i.UserId == invoice.UserId);
+
+            if (existingInvoice == null)
+                return null;
+
+            _context.Entry(existingInvoice).CurrentValues.SetValues(invoice);
+
+            await _context.SaveChangesAsync();
+            return existingInvoice;
         }
     }
 }
